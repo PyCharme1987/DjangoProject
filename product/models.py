@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.crypto import get_random_string
+
 
 class ProductManager(models.Manager):
     def _create(self, **extra_fields):
@@ -30,4 +32,12 @@ class Product(models.Model):
 
     objects = ProductManager()
 
-
+    def get_info(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'price': self.price,
+            'quantity': self.quantity,
+            'country': self.country
+        }
